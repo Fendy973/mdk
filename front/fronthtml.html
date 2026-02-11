@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Кафе «Пьяный Гейгер»</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    /* ===== RESET ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: #0f0f10;
+      color: #eaeaea;
+      line-height: 1.6;
+    }
+    /* ===== HERO BANNER ===== */
+.hero {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("fd187128-9d20-46c0-ae0a-c34719b2113b.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.hero-overlay {
+  position: relative;
+  text-align: center;
+  max-width: 800px;
+  padding: 40px 20px;
+}
+
+.hero h1 {
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 16px;
+  color: #ccc;
+}
+/* ===== RADIATION SIGN FLICKER ===== */
+.radiation {
+  color: #eaffea;
+  text-shadow:
+    0 0 8px rgba(106, 255, 143, 0.4),
+    0 0 16px rgba(106, 255, 143, 0.3);
+  animation: radiationFlicker 4s infinite;
+}
+
+@keyframes radiationFlicker {
+  0% {
+    opacity: 1;
+    text-shadow:
+      0 0 8px rgba(106, 255, 143, 0.4),
+      0 0 16px rgba(106, 255, 143, 0.3);
+  }
+
+  3% {
+    opacity: 0.6;
+  }
+
+  6% {
+    opacity: 1;
+  }
+
+  12% {
+    opacity: 0.85;
+    text-shadow:
+      0 0 12px rgba(106, 255, 143, 0.7),
+      0 0 28px rgba(106, 255, 143, 0.6);
+  }
+
+  14% {
+    opacity: 1;
+  }
+
+  55% {
+    opacity: 0.9;
+  }
+
+  57% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+
+
+    /* ===== HEADER ===== */
+    header {
+      padding: 60px 20px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    header h1 {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    header p {
+      max-width: 520px;
+      color: #aaa;
+      font-size: 15px;
+    }
+
+    /* ===== MENU TITLE ===== */
+    .menu-title {
+      margin-top: 20px;
+    }
+
+    .menu-title h2 {
+      font-size: 28px;
+      font-weight: 500;
+      color: #eaeaea;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      display: flex;
+      gap: 24px;
+      padding: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+      border-bottom: 1px solid #222;
+      flex-wrap: wrap;
+    }
+
+    nav button {
+      background: none;
+      border: none;
+      color: #888;
+      font-size: 14px;
+      cursor: pointer;
+      padding-bottom: 6px;
+      position: relative;
+    }
+
+    nav button.active {
+      color: #eaeaea;
+    }
+
+    nav button.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      background: #6aff90;
+    }
+
+    /* ===== MAIN ===== */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .category {
+      display: none;
+    }
+
+    .category.active {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .item {
+      background: #161617;
+      border-radius: 12px;
+      padding: 24px;
+      transition: transform 0.2s ease;
+      position: relative;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .item:hover {
+      transform: translateY(-4px);
+    }
+
+    .item-image {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .item-content {
+      flex: 1;
+      padding-right: 100px;
+    }
+
+    .item h3 {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .item p {
+      font-size: 14px;
+      color: #aaa;
+    }
+    /* ===== PRICE TAG ===== */
+.price {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #6aff8f;
+}
+
+
+    /* ===== ADD TO CART BUTTON ===== */
+    .add-to-cart {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: none;
+      background: #6aff8f;
+      color: #000;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* ===== CART BUTTON ===== */
+    .cart-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #161617;
+      border: 1px solid #222;
+      color: #6aff8f;
+      font-size: 22px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #6aff8f;
+      color: #000;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ===== CART MODAL ===== */
+    .cart-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1001;
+    }
+
+    .cart-window {
+      background: #161617;
+      border-radius: 12px;
+      padding: 24px;
+      width: 90%;
+      max-width: 420px;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-window h2 {
+      margin-bottom: 12px;
+    }
+
+    .cart-list {
+      list-style: none;
+      overflow-y: auto;
+      flex: 1;
+      margin-bottom: 16px;
+      padding-right: 6px;
+    }
+
+    .cart-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #222;
+      font-size: 14px;
+    }
+
+    .remove-item {
+      background: none;
+      border: none;
+      color: #888;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .cart-close {
+      background: none;
+      border: 1px solid #333;
+      color: #aaa;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+/* ===== CART PRICE ===== */
+.cart-price {
+  color: #6aff8f;
+  margin-left: 12px;
+  white-space: nowrap;
+}
+
+/* ===== CART TOTAL ===== */
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+/* ===== ORDER BUTTON ===== */
+.order-btn {
+  background: #6aff8f;
+  border: none;
+  color: #000;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.order-btn:hover {
+  opacity: 0.9;
+}
+
+    /* ===== FOOTER ===== */
+    footer {
+      max-width: 1100px;
+      margin: 60px auto 20px;
+      padding: 20px;
+      border-top: 1px solid #222;
+      font-size: 12px;
+      color: #666;
+    }
+    /* ===== CONTACTS ===== */
+.contacts {
+  max-width: 1100px;
+  margin: 100px auto;
+  padding: 0 20px;
+}
+
+.contacts-title {
+  font-size: 36px;
+  font-weight: 500;
+  margin-bottom: 40px;
+}
+
+.contacts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.contact-card {
+  background: #161617;
+  border-radius: 12px;
+  padding: 24px;
+  color: #eaeaea;
+}
+
+
+.contact-card h3 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  color: #eaeaea;
+}
+
+.contact-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #aaa;
+}
+
+.contact-card a {
+  color: #eaeaea;
+  text-decoration: none;
+}
+
+.contact-card a:hover {
+  text-decoration: underline;
+}
+
+
+.contact-card {
+  transition: transform 0.2s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-4px);
+}
+
+/* ===== BOOKING MODAL ===== */
+.booking-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.booking-modal.active {
+  display: flex;
+}
+
+.booking-window {
+  background: #161617;
+  border-radius: 12px;
+  padding: 32px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.booking-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 28px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+}
+
+.booking-close:hover {
+  color: #eaeaea;
+}
+
+.booking-title {
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  padding-right: 40px;
+}
+
+.booking-subtitle {
+  color: #aaa;
+  margin-bottom: 32px;
+  font-size: 15px;
+}
+
+.booking-form {
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  max-width: 100%;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #eaeaea;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  background: #0f0f10;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #eaeaea;
+  font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #6aff8f;
+}
+
+.phone-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.phone-prefix {
+  background: #0f0f10;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #aaa;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.phone-input-wrapper input {
+  flex: 1;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.booking-submit {
+  background: #6aff8f;
+  border: none;
+  color: #000;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.booking-submit:hover {
+  opacity: 0.9;
+}
+
+.warning-text {
+  margin-top: 20px;
+  padding: 16px;
+  background: rgba(255, 159, 10, 0.1);
+  border: 1px solid rgba(255, 159, 10, 0.3);
+  border-radius: 8px;
+  color: #ffb84d;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ===== BOOKING CTA SECTION ===== */
+.booking-cta {
+  max-width: 1100px;
+  margin: 80px auto 100px;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.booking-cta-card {
+  background: #161617;
+  border-radius: 12px;
+  padding: 48px 32px;
+  border: 1px solid #222;
+}
+
+.booking-cta h2 {
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  color: #eaeaea;
+}
+
+.booking-cta p {
+  font-size: 16px;
+  color: #aaa;
+  margin-bottom: 28px;
+}
+
+.booking-cta-btn {
+  background: #6aff8f;
+  color: #000;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.booking-cta-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.booking-cta-btn::before {
+  content: "📋 ";
+}
+
+
+/* ===== MOBILE ===== */
+@media (max-width: 900px) {
+  .contacts-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .booking-cta-card {
+    padding: 32px 24px;
+  }
+  
+  .booking-cta h2 {
+    font-size: 24px;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+
+<!-- CART BUTTON -->
+<button class="cart-btn" id="cartBtn">
+  🛒
+  <span class="cart-count" id="cartCount">0</span>
+</button>
+
+<!-- CART MODAL -->
+<div class="cart-modal" id="cartModal">
+  <div class="cart-window">
+    <h2>Корзина</h2>
+
+    <ul class="cart-list" id="cartList"></ul>
+
+    <div class="cart-total">
+      <span>Итого:</span>
+      <span id="totalPrice">0 ₽</span>
+    </div>
+
+      <button class="order-btn" id="orderBtn">Заказать</button>
+      <button class="cart-close" id="closeCart">Закрыть</button>
+  </div>
+
+</div>
+
+<header class="hero">
+  <div class="hero-overlay">
+    <h1><span class="radiation">Кафе «Пьяный Гейгер»</span></h1>
+
+    <p>
+      Аномальная кухня для сталкеров и сочувствующих.<br>
+      Побочные эффекты — часть впечатления.
+    </p>
+  </div>
+</header>
+
+
+<section class="menu-title">
+  <h2 align="center">Меню</h2>
+</section>
+
+<nav>
+  <button class="active" data-target="snacks">Закуски</button>
+  <button data-target="main">Основные</button>
+  <button data-target="desserts">Десерты</button>
+  <button data-target="drinks">Напитки</button>
+</nav>
+
+<main>
+
+<section class="category active" id="snacks">
+  <div class="item">
+    <img src="радость_туриста.png" alt="Тушёнка «Радость туриста»" class="item-image">
+    <div class="item-content">
+      <button class="add-to-cart">+</button>
+      <h3>Тушёнка «Радость туриста»</h3>
+      <p>Консервированное мясо неизвестного происхождения.</p>
+      <span class="price">299 ₽</span>
+    </div>
+  </div>
+</section>
+
+<section class="category" id="main">
+  <div class="item">
+    <img src="жаркое_из_мутантов.png" alt="Жаркое из мутантов" class="item-image">
+    <div class="item-content">
+      <button class="add-to-cart">+</button>
+      <h3>Жаркое из мутантов</h3>
+      <p>Медленно томится до полной потери агрессии.</p>
+      <span class="price">699 ₽</span>
+    </div>
+  </div>
+  <div class="item">
+    <img src="чесночный_суп.png" alt="Чесночный суп" class="item-image">
+    <div class="item-content">
+      <button class="add-to-cart">+</button>
+      <h3>Чесночный суп</h3>
+      <p>Отпугивает мутантов и людей в радиусе трёх метров.</p>
+      <span class="price">1099 ₽</span>
+    </div>
+  </div>
+</section>
+
+<section class="category" id="desserts">
+  <div class="item">
+    <img src="пирог.png" alt="Аномальный пирог" class="item-image">
+    <div class="item-content">
+      <button class="add-to-cart">+</button>
+      <h3>Аномальный пирог</h3>
+      <p>Мутировавшие ягоды. Возможны эффекты.</p>
+      <span class="price">499 ₽</span>
+    </div>
+  </div>
+</section>
+
+<section class="category" id="drinks">
+  <div class="item">
+    <img src="коктейль.png" alt="Радиационный коктейль" class="item-image">
+    <div class="item-content">
+      <button class="add-to-cart">+</button>
+      <h3>Радиационный коктейль</h3>
+      <p>Светится в темноте. Иногда.</p>
+      <span class="price">249 ₽</span>
+    </div>
+  </div>
+  <div class="item">
+    <img src="чай.png" alt="Мутационный чай" class="item-image">
+    <div class="item-content">
+      <button class="add-to-cart">+</button>
+      <h3>Мутационный чай</h3> 
+      <p>Свойства не задокументированы. Возможно будет похмелье.</p> 
+      <span class="price">99 ₽</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- BOOKING MODAL -->
+<div class="booking-modal" id="bookingModal">
+  <div class="booking-window">
+    <button class="booking-close" id="closeBooking">×</button>
+    
+    <h2 class="booking-title">Бронирование столика</h2>
+    <p class="booking-subtitle">
+      Зарезервируйте место в безопасной зоне. Гарантия от аномалий не предусмотрена.
+    </p>
+
+    <form class="booking-form" id="bookingForm">
+      <div class="form-group">
+        <label for="name">Позывной / Имя *</label>
+        <input type="text" id="name" name="name" placeholder="Меченый" required>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phone">Телефон *</label>
+          <div class="phone-input-wrapper">
+            <span class="phone-prefix">+7</span>
+            <input 
+              type="tel" 
+              id="phone" 
+              name="phone" 
+              placeholder="9001234567" 
+              pattern="[0-9]{10}"
+              maxlength="10"
+              required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" placeholder="необязательно">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="date">Дата визита *</label>
+          <input type="date" id="date" name="date" required>
+        </div>
+
+        <div class="form-group">
+          <label for="time">Время *</label>
+          <input type="time" id="time" name="time" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="guests">Количество гостей *</label>
+          <select id="guests" name="guests" required>
+            <option value="">Выберите</option>
+            <option value="1">1 сталкер</option>
+            <option value="2">2 сталкера</option>
+            <option value="3">3 сталкера</option>
+            <option value="4">4 сталкера</option>
+            <option value="5">5 сталкеров</option>
+            <option value="6+">6+ (группировка)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="zone">Предпочитаемая зона</label>
+          <select id="zone" name="zone">
+            <option value="">Выберите</option>
+            <option value="safe">Безопасная зона</option>
+            <option value="bar">У барной стойки</option>
+            <option value="window">У окна (вид на развалины)</option>
+            <option value="corner">Укромный угол</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="comments">Особые пожелания</label>
+        <textarea id="comments" name="comments" placeholder="Нужен детектор аномалий? Антирад на стол? Пишите здесь..."></textarea>
+      </div>
+
+      <button type="submit" class="booking-submit">Забронировать</button>
+
+      <div class="warning-text">
+        ⚠️ <strong>Внимание:</strong> Администрация не несёт ответственности за психические и физические эффекты, вызванные употреблением блюд. Рекомендуется иметь при себе аптечку и счётчик Гейгера.
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- BOOKING CTA SECTION (между меню и контактами) -->
+<section class="booking-cta">
+  <div class="booking-cta-card">
+    <h2>Готовы войти в Зону?</h2>
+    <p>Забронируйте столик заранее и получите антирад в подарок</p>
+    <button class="booking-cta-btn" id="ctaBookingBtn">Забронировать столик</button>
+  </div>
+</section>
+
+<section id="contacts" class="contacts">
+  <h2 class="contacts-title">Контакты</h2>
+
+  <div class="contacts-grid">
+    <div class="contact-card">
+      <h3>Адрес</h3>
+      <p>
+        Чернобыль-2<br>
+        Киевская область<br>
+        Украина
+      </p>
+    </div>
+
+    <div class="contact-card">
+      <h3>Телефоны</h3>
+      <p>
+        Администратор:<br>
+        <a href="tel:+79114754969">+7 911 475-49-69</a>
+      </p>
+    </div>
+
+    <div class="contact-card">
+      <h3>Режим работы</h3>
+      <p>
+        Пн–Чт: 12:00–23:00<br>
+        Пт–Сб: 12:00–00:00<br>
+        Вс: 12:00–22:00
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+© Кафе «Пьяный Гейгер». Вход на свой страх и риск.
+</footer>
+
+<script>
+  const buttons = document.querySelectorAll("nav button");
+  const categories = document.querySelectorAll(".category");
+
+  buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      buttons.forEach(b => b.classList.remove("active"));
+      categories.forEach(c => c.classList.remove("active"));
+      btn.classList.add("active");
+      document.getElementById(btn.dataset.target).classList.add("active");
+    });
+  });
+
+  // ===== BOOKING MODAL =====
+  const bookingModal = document.getElementById("bookingModal");
+  const ctaBookingBtn = document.getElementById("ctaBookingBtn");
+  const closeBooking = document.getElementById("closeBooking");
+
+  // Открытие модального окна бронирования
+  ctaBookingBtn.addEventListener("click", () => {
+    bookingModal.classList.add("active");
+  });
+
+  // Закрытие модального окна
+  closeBooking.addEventListener("click", () => {
+    bookingModal.classList.remove("active");
+  });
+
+  // Закрытие при клике вне окна
+  bookingModal.addEventListener("click", (e) => {
+    if (e.target === bookingModal) {
+      bookingModal.classList.remove("active");
+    }
+  });
+
+  // ===== ВАЛИДАЦИЯ И ОБРАБОТКА ФОРМЫ БРОНИРОВАНИЯ =====
+  const bookingForm = document.getElementById("bookingForm");
+  const phoneInput = document.getElementById("phone");
+  const dateInput = document.getElementById("date");
+  const timeInput = document.getElementById("time");
+
+  // Разрешаем вводить только цифры в номер телефона
+  phoneInput.addEventListener("input", (e) => {
+    e.target.value = e.target.value.replace(/\D/g, '').substring(0, 10);
+  });
+
+  // Устанавливаем минимальную дату (сегодня)
+  const today = new Date().toISOString().split('T')[0];
+  dateInput.setAttribute('min', today);
+
+  bookingForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    
+    const name = document.getElementById("name").value;
+    const phone = phoneInput.value;
+    const date = dateInput.value;
+    const time = timeInput.value;
+    const guests = document.getElementById("guests").value;
+
+    // Проверка номера телефона (ровно 10 цифр)
+    if (phone.length !== 10) {
+      alert("⚠️ Номер телефона должен содержать ровно 10 цифр!");
+      return;
+    }
+
+    // Проверка даты и времени (не должны быть в прошлом)
+    const selectedDateTime = new Date(date + 'T' + time);
+    const now = new Date();
+
+    if (selectedDateTime < now) {
+      alert("⚠️ Нельзя забронировать столик на прошедшее время! Выберите будущую дату и время.");
+      return;
+    }
+    
+    // Формируем полный номер телефона
+    const fullPhone = '+7' + phone;
+    
+    alert(`Столик забронирован! 
+    
+Сталкер: ${name}
+Телефон: ${fullPhone}
+Дата: ${new Date(date).toLocaleDateString('ru-RU')}
+Время: ${time}
+Гостей: ${guests}
+
+Ждём вас в «Пьяном Гейгере». Не забудьте антирад! ☢️`);
+    
+    bookingForm.reset();
+    bookingModal.classList.remove("active");
+  });
+
+  // ===== PRICES =====
+  const prices = {
+    "Тушёнка «Радость туриста»": 299,
+    "Жаркое из мутантов": 699,
+    "Чесночный суп": 1099,
+    "Аномальный пирог": 499,
+    "Радиационный коктейль": 249,
+    "Мутационный чай": 99
+  };
+
+  const cart = [];
+  const cartList = document.getElementById("cartList");
+  const cartCount = document.getElementById("cartCount");
+  const totalPriceEl = document.getElementById("totalPrice");
+
+  document.querySelectorAll(".add-to-cart").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const title = btn.parentElement.querySelector("h3").textContent;
+      cart.push(title);
+      updateCart();
+    });
+  });
+
+  function updateCart() {
+    cartList.innerHTML = "";
+    let total = 0;
+
+    cart.forEach((item, index) => {
+      const price = prices[item] || 0;
+      total += price;
+
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <span>${item}</span>
+        <span class="cart-price">${price} ₽</span>
+        <button class="remove-item" data-index="${index}">✕</button>
+      `;
+      cartList.appendChild(li);
+    });
+
+    cartCount.textContent = cart.length;
+    totalPriceEl.textContent = total + " ₽";
+
+    document.querySelectorAll(".remove-item").forEach(btn => {
+      btn.onclick = () => {
+        cart.splice(btn.dataset.index, 1);
+        updateCart();
+      };
+    });
+  }
+
+  const cartBtn = document.getElementById("cartBtn");
+  const cartModal = document.getElementById("cartModal");
+  const closeCart = document.getElementById("closeCart");
+  const orderBtn = document.getElementById("orderBtn");
+
+  cartBtn.onclick = () => cartModal.style.display = "flex";
+  closeCart.onclick = () => cartModal.style.display = "none";
+
+  orderBtn.onclick = () => {
+    if (!cart.length) {
+      alert("Корзина пуста ☢️");
+      return;
+    }
+    alert("Заказ оформлен! Сталкеры уже выдвинулись 🚶‍♂️");
+    cart.length = 0;
+    updateCart();
+    cartModal.style.display = "none";
+  };
+</script>
+
+
+</body>
+
+</html>
